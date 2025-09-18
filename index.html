@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>דודו שמאי - לכוון גבוה</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- EmailJS SDK -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      line-height: 1.7;
+      background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    
+    /* Header מודרני */
+    header {
+      background: linear-gradient(135deg, #00b5ad 0%, #009c95 50%, #007d75 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+      pointer-events: none;
+    }
+    
+    header .content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    
+    header img:hover {
+      transform: scale(1.05);
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: clamp(2em, 5vw, 3.2em);
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      line-height: 1.2;
+    }
+    
+    header p {
+      margin: 20px auto 40px auto;
+      font-size: clamp(1.1em, 2.5vw, 1.4em);
+      opacity: 0.95;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      max-width: 800px;
+    }
+    
+    /* כפתורי יצירת קשר בהדר */
+    .header-contact {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    
+    .contact-btn {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .contact-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* כפתורי שיתוף */
+    .share-section {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .share-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .share-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .whatsapp { background: #25D366; }
+    .email { background: #EA4335; }
+    .copy { background: #007d75; }
+    .phone { background: #007d75; }
+    
+    section {
+      padding: 100px 20px;
+      max-width: 1300px;
+      margin: auto;
+      position: relative;
+    }
+    
+    h2 {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: clamp(2em, 4vw, 2.8em);
+      color: #007d75;
+      position: relative;
+      font-weight: 700;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #00b5ad, #009c95);
+      border-radius: 2px;
+    }
+    
+    .grid {
+      display: grid;
+      gap: 30px;
+    }
+    
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+    
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 40px 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(0,181,173,0.1);
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,181,173,0.05), transparent);
+      transition: left 0.6s;
+    }
+    
+    .card:hover::before {
+      left: 100%;
+    }
+    
+    .card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,181,173,0.15);
+      border-color: rgba(0,181,173,0.2);
+    }
+    
+    .card h3 {
+      margin: 25px 0 20px 0;
+      color: #009c95;
+      font-size: 1.5em;
+      font-weight: 700;
+    }
+    
+    .card i {
+      font-size: 3.5em;
+      margin-bottom: 25px;
+      color: #00b5ad;
+      transition: all 0.3s;
+    }
+    
+    .card:hover i {
+      transform: scale(1.2) rotate(5deg);
+      color: #007d75;
+    }
+    
+    .card p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #555;
+    }
+    
+    .card img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    
+    /* הדגשת קלפים מיוחדים */
+    .featured-card {
+      background: linear-gradient(135deg, #f0fffd 0%, #e0f7f5 100%);
+      border: 2px solid #00b5ad;
+      position: relative;
+    }
+    
+    .featured-card::after {
+      content: '⭐ מומלץ במיוחד';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00b5ad;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+    
+    .highlight {
+      background: linear-gradient(135deg, #e0f7f5 0%, #d0f2ef 100%);
+      border-radius: 25px;
+      padding: 50px;
+      margin: auto;
+      max-width: 1000px;
+      box-shadow: 0 15px 35px rgba(0,181,173,0.1);
+      border: 2px solid rgba(0,181,173,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .highlight::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0,181,173,0.05) 0%, transparent 70%);
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .highlight p {
+      margin-bottom: 25px;
+      font-size: 1.2em;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .highlight p:last-child {
+      margin-bottom: 0;
+    }
+    
+    /* עדויות לקוחות */
+    .testimonials {
+      background: linear-gradient(135deg, #f8f9ff 0%, #e6f4ea 100%);
+      padding: 80px 20px;
+      margin: 60px 0;
+    }
+    
+    .testimonial-card {
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      margin: 20px 0;
+      position: relative;
+    }
+    
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      font-size: 4em;
+      color: #00b5ad;
+      opacity: 0.3;
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      font-size: 1.1em;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    
+    .testimonial-author {
+      font-weight: 600;
+      color: #007d75;
+      text-align: left;
+    }
+    
+    /* טופס משופר */
+    form {
+      display: grid;
+      gap: 25px;
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 50px;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border: 1px solid rgba(0,181,173,0.1);
+    }
+    
+    .form-group {
+      position: relative;
+    }
+    
+    label {
+      font-weight: 700;
+      color: #007d75;
+      margin-bottom: 8px;
+      display: block;
+      font-size: 1.1em;
+    }
+    
+    input, textarea, select {
+      padding: 18px 20px;
+      border-radius: 15px;
+      border: 2px solid #e0e0e0;
+      width: 100%;
+      font-family: inherit;
+      font-size: 1.1em;
+      transition: all 0.3s;
+      background: #fafafa;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #00b5ad;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(0,181,173,0.1);
+      transform: translateY(-2px);
+    }
+    
+    button {
+      padding: 20px;
+      border-radius: 15px;
+      border: none;
+      background: linear-gradient(135deg, #00b5ad 0%, #009c95 100%);
+      color: white;
+      cursor: pointer;
+      font-size: 1.3em;
+      font-weight: 700;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,181,173,0.3);
+    }
+    
+    button:active {
+      transform: translateY(-1px);
+    }
+    
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    /* הודעות סטטוס משופרות */
+    .status-message {
+      padding: 20px 25px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: translateY(-20px);
+      border: 2px solid transparent;
+    }
+    
+    .status-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .status-message.success {
+      background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+      color: #155724;
+      border-color: #b8e6c1;
+    }
+    
+    .status-message.error {
+      background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%);
+      color: #721c24;
+      border-color: #f5c6cb;
+    }
+    
+    .status-message.loading {
+      background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+      color: #0c5460;
+      border-color: #b8daff;
+    }
+    
+    /* פוטר משופר */
+    footer {
+      background: linear-gradient(135deg, #007d75 0%, #005a54 100%);
+      color: white;
+      padding: 60px 20px 40px 20px;
+      margin-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #00b5ad, #009c95, #007d75);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+    
+    .footer-section h3 {
+      color: #00b5ad;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+    }
+    
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .footer-contact a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 8px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .footer-contact a:hover {
+      background: rgba(0,181,173,0.2);
+      transform: translateY(-2px);
+    }
+    
+    .subtext {
+      text-align: center;
+      margin-bottom: 50px;
+      color: #666;
+      font-size: 1.3em;
+      font-style: italic;
+      font-weight: 300;
+    }
+    
+    /* אנימציות */
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-on-scroll {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s ease;
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* רספונסיביות */
+    @media (max-width: 768px) {
+      .share-section {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        left: auto;
+        top: auto;
+        transform: none;
+        flex-direction: row;
+        gap: 10px;
+      }
+      
+      .share-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1em;
+      }
+      
+      header {
+        padding: 60px 15px;
+      }
+      
+      header .logo-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      header img {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .header-contact {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      section {
+        padding: 80px 15px;
+      }
+      
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      
+      .card {
+        padding: 30px 20px;
+      }
+      
+      form {
+        padding: 30px 20px;
+        margin: 0 10px;
+      }
+      
+      .highlight {
+        padding: 30px 20px;
+        margin: 0 10px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+    
+    /* אפקטים נוספים */
+    .section-bg-1 { background: linear-gradient(135deg, #f0fffd 0%, #e6faf9 100%); }
+    .section-bg-2 { background: linear-gradient(135deg, #e6faff 0%, #d9f4ff 100%); }
+    .section-bg-3 { background: linear-gradient(135deg, #fffbea 0%, #fef7e0 100%); }
+    .section-bg-4 { background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%); }
+    .section-bg-5 { background: linear-gradient(135deg, #e6f4ea 0%, #d4f1d9 100%); }
+    
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 100px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: #00b5ad;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2em;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 999;
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .scroll-top:hover {
+      background: #009c95;
+      transform: translateY(-5px);
+    }
+    
+    @media (max-width: 768px) {
+      .scroll-top {
+        bottom: 80px;
+        right: 20px;
+        left: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- כפתורי שיתוף -->
+  <div class="share-section">
+    <a href="#" class="share-btn whatsapp" onclick="shareWhatsApp()" title="שתף בווטסאפ">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="mailto:?subject=דודו שמאי - מרצה מעולה&body=היי, מצאתי מרצה מעולה שכדאי להכיר: " class="share-btn email" title="שלח במייל">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <a href="tel:050-7739769" class="share-btn phone" title="התקשר עכשיו">
+      <i class="fas fa-phone"></i>
+    </a>
+    <button class="share-btn copy" onclick="copyLink()" title="העתק קישור">
+      <i class="fas fa-link"></i>
+    </button>
+  </div>
+
+  <!-- כפתור חזרה למעלה -->
+  <button class="scroll-top" onclick="scrollToTop()" title="חזור למעלה">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <header>
+    <div class="content">
+      <div class="logo-container">
+        <img src="logo2.jpg" alt="דודו שמאי">
+        <div>
+          <h1>לכוון גבוה – להפוך סיפור אישי לעוצמה</h1>
+          <p>הרצאות, סדנאות ותהליכים אישיים עם דודו שמאי</p>
+        </div>
+      </div>
+      
+      <div class="header-contact">
+        <a href="tel:050-7739769" class="contact-btn">
+          <i class="fas fa-phone"></i>
+          התקשר עכשיו
+        </a>
+        <a href="https://wa.me/972507739769" class="contact-btn" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          ווטסאפ
+        </a>
+        <a href="#contact" class="contact-btn">
+          <i class="fas fa-envelope"></i>
+          השאר פרטים
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- הרצאות -->
+  <section class="section-bg-1">
+    <h2>הרצאות מעוררות השראה</h2>
+    <div class="grid grid-2">
+      <div class="card featured-card">
+        <i class="fas fa-star"></i>
+        <h3>להיות שונה זה הכי שווה</h3>
+        <p>הרצאת הדגל – מופע מלא רגש והומור, עם סיפור אישי מעורר השראה וכלים מעשיים לחיים עם ערך עצמי גבוה.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-gem"></i>
+        <h3>ללטש את היהלום</h3>
+        <p>תקשורת מעצימה במשפחה – להפוך שיחות יומיומיות להזדמנויות לקרבה, אמון ושיתוף פעולה.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-bolt"></i>
+        <h3>מ-0 ל-100 ב-60 שניות</h3>
+        <p>איך להרים את עצמנו ואת הסובבים באנרגיה, חדות והשראה – גם ברגעי קושי.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-sun"></i>
+        <h3>להרים את התדר והאנרגיה</h3>
+        <p>הרצאה חווייתית שמכניסה שמחה ותנועה לכל מסגרת – בית ספר, ארגון או קהילה.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-mountain"></i>
+        <h3>לכוון גבוה</h3>
+        <p>הרצאת מופע ייחודית שמשלבת סיפור אישי, הומור ותובנות לחיים – ערב מלא השראה.</p>
+      </div>
+      <div class="card">
+        <img src="IMG_72521.jpg" alt="דודו שמאי בהרצאה">
+      </div>
+    </div>
+  </section>
+
+  <!-- סדנאות -->
+  <section class="section-bg-2">
+    <h2>מגוון סדנאות מעשיות</h2>
+    <div class="subtext">סדנאות אינטראקטיביות המותאמות לתלמידים, אנשי חינוך, הורים וארגונים</div>
+    <div class="grid grid-2">
+      <div class="card">
+        <i class="fas fa-user-graduate"></i>
+        <h3>לתלמידים</h3>
+        <p>כלים לבניית ביטחון עצמי, לקבל את עצמי ואת האחר, התמודדות עם לחץ חברתי, הגשמת מטרות ויעדים.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <h3>לאנשי חינוך</h3>
+        <p>חיבור לכלל התלמידים, יצירת אקלים חיובי בכיתה, עידוד למציאת הייחודיות בכל תלמיד ומניעת בריונות.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-people-roof"></i>
+        <h3>להורים</h3>
+        <p>כלים לחינוך לקבלת השונות, תמיכה בכל ילד לפי הדרכו, דיאלוג פתוח ואווירה משפחתית נעימה.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-building"></i>
+        <h3>לארגונים</h3>
+        <p>פיתוח מנהיגות מעוררת השראה, גיוון והכלה בעבודה, חיזוק הצוות ויצירת בידול עסקי.</p>
+      </div>
+      <div class="card">
+        <img src="logo2.jpg" alt="לוגו דודו שמאי">
+      </div>
+    </div>
+  </section>
+
+  <!-- עדויות -->
+  <div class="testimonials">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h2 style="color: #007d75; margin-bottom: 50px;">מה אומרים עליי</h2>
+      <div class="grid grid-3">
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            דודו הביא לבית הספר שלנו רוח חדשה. התלמידים יצאו מההרצאה עם חיוך ואמונה בעצמם. הרצאה מעוררת השראה באמת!
+          </div>
+          <div class="testimonial-author">- רונית כהן, מנהלת בי"ס תיכון</div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            בעקבות ההרצאה של דודו, הבן שלי החל לדבר על החלומות שלו ולתכנן את העתיד בביטחון. תודה רבה!
+          </div>
+          <div class="testimonial-author">- מיכל לוי, אמא לתלמיד כיתה י'</div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            מרצה מקצועי שיודע בדיוק איך להגיע לכל אחד. השילוב של הומור וחוכמה - מושלם!
+          </div>
+          <div class="testimonial-author">- אבי שמש, מנכ"ל חברת הייטק</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- למי זה מתאים -->
+  <section class="section-bg-3">
+    <h2>אז למי זה מתאים?</h2>
+    <div class="subtext">כל מי שמחפש השראה ושינוי חיובי</div>
+    <div class="grid grid-3">
+      <div class="card">
+        <i class="fas fa-school"></i>
+        <h3>תלמידי בתי ספר</h3>
+        <p>כיתות ז'-יב' – ביטחון עצמי, התמודדות עם לחץ חברתי, גילוי הייחודיות האישית והגשמת חלומות.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-person-chalkboard"></i>
+        <h3>צוותי חינוך</h3>
+        <p>מורים ויועצים – כלים לחיבור עם כלל התלמידים, טיפול בגיוון, אקלים חיובי ומניעת בריונות.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-users"></i>
+        <h3>חוגי בית</h3>
+        <p>ערב חווייתי, מרגש ומלא בהומור ותובנות, מיועד לזוגות וקבוצות – חוויה שהיא גם מופע וגם השראה.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-house-chimney"></i>
+        <h3>הורים ומשפחות</h3>
+        <p>חינוך לקבלת השונות, תמיכה בילדים, דיאלוג פתוח ובניית אקלים משפחתי חיובי.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-briefcase"></i>
+        <h3>ארגונים וחברות</h3>
+        <p>אירועי עובדים – השראה, גיוון והכלה, חיזוק הצוות וחשיבות הבידול העסקי.</p>
+      </div>
+      <div class="card">
+        <img src="logo2.jpg" alt="לוגו דודו שמאי">
+      </div>
+    </div>
+  </section>
+
+  <!-- מי זה דודו שמאי -->
+  <section class="section-bg-4">
+    <h2>אז מי זה דודו שמאי?</h2>
+    <div class="highlight">
+      <p><strong>🎭 שחקן, מרצה ומעורר השראה</strong> – דודו שמאי הוא אחד המרצים המבוקשים בישראל.</p>
+      <p><strong>📺 מהטלוויזיה לבמה האישית שלכם:</strong> הכרתם אותו מסדרות כמו "הבוגדים", "צומת מילר", "סליחה על השאלה", "טאבו" ועוד.</p>
+      <p><strong>✨מאתגרים להצלחות:</strong> הילד שקיבל פטור מצה"ל בגלל גובהו, הפך לדמות משפיעה ביותר בתחום ההשראה, הערך העצמי ועולמות החינוך.</p>
+      <p><strong>🎯 מעל 20,000 אנשים כבר חוו את ההרצאות שלו</strong> – תלמידים, מורים, הורים ואנשי מקצוע.</p>
+    </div>
+  </section>
+
+  <!-- טופס יצירת קשר -->
+  <section id="contact" class="section-bg-5">
+    <div style="background: linear-gradient(135deg, #ff6b6b, #ffd93d); padding: 30px; border-radius: 20px; text-align: center; color: white; margin: 40px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+      <h3 style="margin: 0 0 30px 0; font-size: 1.5em;">📧 רוצים ליצור קשר?</h3>
+      <p style="font-size: 1.2em; margin-bottom: 25px;">בחרו את הדרך הנוחה לכם:</p>
+      
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <a href="tel:050-7739769" style="background: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 15px 25px; border-radius: 25px; font-weight: bold; backdrop-filter: blur(10px); transition: all 0.3s; display: flex; align-items: center; gap: 8px;">
+          <i class="fas fa-phone"></i>
+          התקשר עכשיו
+        </a>
+        
+        <a href="https://wa.me/972507739769?text=היי%20דודו!%20מעוניין%20בהרצאה" target="_blank" style="background: #25D366; color: white; text-decoration: none; padding: 15px 25px; border-radius: 25px; font-weight: bold; transition: all 0.3s; display: flex; align-items: center; gap: 8px;">
+          <i class="fab fa-whatsapp"></i>
+          שלח ווטסאפ
+        </a>
+        
+        <a href="mailto:dudush06@gmail.com?subject=פנייה מהאתר - הרצאה&body=היי דודו,%0A%0Aמעוניין לשמוע על האפשרויות להרצאה.%0A%0Aפרטי יצירת קשר:%0Aשם:%0Aטלפון:%0Aסוג אירוع:%0Aמספר משתתפים:%0Aתאריך מועדף:%0A%0Aתודה!" style="background: #EA4335; color: white; text-decoration: none; padding: 15px 25px; border-radius: 25px; font-weight: bold; transition: all 0.3s; display: flex; align-items: center; gap: 8px;">
+          <i class="fas fa-envelope"></i>
+          שלח מייל
+        </a>
+      </div>
+      
+      <div style="margin-top: 35px; font-size: 0.9em; opacity: 0.9;">
+        💡 כל השיטות מובילות ישירות אליי - אחזור אליכם בהקדם!
+      </div>
+    </div>
+    
+ <!-- טופס יצירת קשר -->
+  <section style="background:#e6f4ea;">
+    <h2>או השאירו פרטים ואחזור אליכם</h2>
+    <form id="contact-form">
+      <label for="name">שם מלא:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="phone">טלפון:</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <label for="email">אימייל:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="service">סוג השירות:</label>
+      <select id="service" name="service" required>
+        <option value="">בחרו...</option>
+        <option value="lecture">הרצאה</option>
+        <option value="workshop">סדנה</option>
+        <option value="house">חוג בית</option>
+        <option value="process">תהליך אישי</option>
+      </select>
+
+      <label for="date">תאריך מועדף במידה ויש:</label>
+      <input type="date" id="date" name="date">
+
+      <label for="participants">מספר משתתפים:</label>
+      <input type="number" id="participants" name="participants" min="1">
+
+      <label for="message">הודעה:</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit">שלח</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>יצירת קשר</h3>
+        <div class="footer-contact">
+          <a href="tel:050-7739769">
+            <i class="fas fa-phone"></i>
+            050-7739769
+          </a>
+          <a href="mailto:dudush06@gmail.com">
+            <i class="fas fa-envelope"></i>
+            aimhigh.lectures@gmail.com
+          </a>
+          <a href="https://wa.me/972507739769" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            ווטסאפ
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>השירותים שלנו</h3>
+        <div style="text-align: center; line-height: 2;">
+          <div>הרצאות מעוררות השראה</div>
+          <div>סדנאות אינטראקטיביות</div>
+          <div>חוגי בית</div>
+          <div>ליווי אישי</div>
+        </div>
+      </div>
+      
+   <footer>
+    <p>© 2025 דודו שמאי - כל הזכויות שמורות</p>
+  </footer>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("h8iAnGK8kB50Pzx5s"); // ה-Public Key שלך
+    })();
+
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      emailjs.sendForm("service_uuk6shc", "template_v4tudwo", this)
+        .then(() => {
+          alert("ההודעה נשלחה בהצלחה!");
+          this.reset();
+        }, (error) => {
+          alert("אירעה שגיאה, נסה שוב.");
+          console.error("EmailJS Error:", error);
+        });
+    });
+  </script>
+</body>
+
+      <div class="footer-section">
+        <h3>עקבו אחריי</h3>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+          <a href="https://www.facebook.com/dudushamay" target="_blank" style="background: #3b5998; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/dudu.shamay" target="_blank" style="background: #e4405f; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/dudu-shamay-9306a720/" target="_blank" style="background: #0077b5; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://www.youtube.com/@dudu.shamay" target="_blank" style="background: #ff0000; padding: 10px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2);">
+      <p>© 2025 דודו שמאי - כל הזכויות שמורות</p>
+    </div>
+  </footer>
+
+  <script>
+    // אתחול EmailJS - בדיוק כמו בקוד המקורי שעבד
+    (function(){
+      emailjs.init("h8iAnGK8kB50Pzx5s");
+    })();
+
+</html>
